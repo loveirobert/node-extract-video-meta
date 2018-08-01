@@ -1,0 +1,17 @@
+{
+  "name": "extract-video-meta",
+  "version": "1.0.0",
+  "description": "This library is created to extract metadata from various action cam videos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.15",
+    "@ffprobe-installer/ffprobe": "^1.0.9",
+    "fluent-ffmpeg": "^2.1.2",
+    "lodash": "^4.17.10"
+  }
+}
