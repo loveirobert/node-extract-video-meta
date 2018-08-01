@@ -89,6 +89,6 @@ const signalMap = {
   WRGB: {
     description: 'WRGB - White Balance RGB gains (Geeky white balance info)',
   },
-};
+}
 
-module.exports = signalMap;
+module.exports = signalMap

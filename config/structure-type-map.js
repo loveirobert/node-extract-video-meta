@@ -1,29 +1,31 @@
 const readNext = (buffer, readState, structureLength, length, reader) => {
-  let data = [];
+  let data = []
   for (let i = readState.position; i < readState.position + structureLength; i += length) {
-    const buf = Buffer.from(buffer.slice(i, i + length));
+    const buf = Buffer.from(buffer.slice(i, i + length))
     if (structureLength === 1) {
-      data = buf;
-      continue;
+      data = buf
+    } else if (reader) {
+      data.push(buf[reader](0, length))
+    } else {
+      data.push(buf)
     }
-    reader ? data.push(buf[reader](0, length)) : data.push(buf);
   }
-  readState.position += structureLength;
-  return data;
-};
+  readState.position += structureLength
+  return data
+}
 
 const getDataParts = ({
   reader, buffer, byteLength, structureLength, structureRepeat,
 }) => {
-  const dataParts = [];
+  const dataParts = []
   const readState = {
     position: 0,
-  };
-  while (readState.position < structureLength * structureRepeat) {
-    dataParts.push(readNext(buffer, readState, structureLength, byteLength, reader));
   }
-  return dataParts;
-};
+  while (readState.position < structureLength * structureRepeat) {
+    dataParts.push(readNext(buffer, readState, structureLength, byteLength, reader))
+  }
+  return dataParts
+}
 
 const structureTypeMap = {
   '\u0000': {
@@ -104,6 +106,6 @@ const structureTypeMap = {
       structureRepeat,
     }).join(''),
   },
-};
+}
 
-module.exports = structureTypeMap;
+module.exports = structureTypeMap

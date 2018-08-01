@@ -2,9 +2,12 @@ module.exports = {
     extends: ['airbnb/base'
   ],
     plugins: [],
+    parser: 'babel-eslint',
     parserOptions: {
+      "ecmaVersion": 7,
       ecmaFeatures: {
-        experimentalObjectRestSpread: true
+        experimentalObjectRestSpread: true,
+        generators: true,
     }
   },
     settings: {},
@@ -20,6 +23,9 @@ module.exports = {
       'import/extensions': 0,
       'arrow-body-style': 0,
       'no-param-reassign': 0,
+      'no-control-regex': 0,
+      'no-await-in-loop': 0,
+      'semi': 0,
       'arrow-parens': ['error', 'always'
     ],
       'no-plusplus': [

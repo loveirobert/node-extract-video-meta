@@ -12,6 +12,7 @@
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.15",
     "@ffprobe-installer/ffprobe": "^1.0.9",
+    "babel-eslint": "^8.2.6",
     "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.10"
   },
