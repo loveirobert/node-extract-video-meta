@@ -4,7 +4,8 @@
   "description": "This library is created to extract metadata from various action cam videos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js ."
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,10 @@
     "@ffprobe-installer/ffprobe": "^1.0.9",
     "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0"
   }
 }
