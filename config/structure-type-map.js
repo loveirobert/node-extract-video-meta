@@ -4,6 +4,8 @@ const readNext = (buffer, readState, structureLength, length, reader) => {
     const buf = Buffer.from(buffer.slice(i, i + length))
     if (structureLength === 1) {
       data = buf
+    } else if (reader && structureLength === length) {
+      data = buf[reader](0, length)
     } else if (reader) {
       data.push(buf[reader](0, length))
     } else {

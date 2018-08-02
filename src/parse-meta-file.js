@@ -100,12 +100,19 @@ const pileUp = (parts) => {
     if (lastPart) {
       if (isAccumulator(lastPart.dataType)) {
         lastPart.values = [...batch.reverse()]
+        const batchPart = batch.find((candidate) => signalMap[candidate.signal].hasEffectOn)
+        if (batchPart) {
+          const partWithEffect = signalMap[batchPart.signal]
+          const { hasEffectOn, operation } = partWithEffect
+          const applyOn = batch.find((candidate) => hasEffectOn.includes(candidate.signal))
+          if (applyOn) applyOn.value = operation(batchPart.value, applyOn.value)
+        }
         batch = []
         hierarchy.push(lastPart)
       }
     }
     // TODO: remove the cutting
-    if (Array.isArray(part.value)) part.value = [part.value[0]]
+    // if (Array.isArray(part.value)) part.value = [part.value[0]]
     // TODO: if batch contains composite structures, like FACE it should be parsed
     // TODO: if there is divisor the values should be divided according to it
     if (!isAccumulator(part.dataType)) batch.push(part)

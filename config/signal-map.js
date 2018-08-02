@@ -25,6 +25,14 @@ const signalMap = {
   },
   SCAL: {
     description: 'SCAL - divisor for input data to scale to the correct units',
+    hasEffectOn: [
+      'GPS5',
+      'ACCL',
+      'GYRO',
+    ],
+    operation: (scal, val) => {
+      return val.map((element) => element.map((current, index) => current / (scal[index] || scal)))
+    },
   },
   TYPE: {
     description: 'TYPE - Type define for complex data structures',
