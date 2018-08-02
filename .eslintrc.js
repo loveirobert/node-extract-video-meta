@@ -15,7 +15,6 @@ module.exports = {
       SyntheticInputEvent: true,
   },
     rules: {
-      'no-cond-assign': 0,
       'no-console': 2,
       'consistent-return': 0,
       'id-length': 0,
