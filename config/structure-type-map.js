@@ -39,7 +39,7 @@ const structureTypeMap = {
       buffer,
       structureLength,
       structureRepeat,
-    }).map((character) => character.toString()).join(''),
+    }).map((character) => (Array.isArray(character) ? character.map((char) => char.toString()).join('') : character.toString())).join(''),
   },
   f: {
     description: '32-bit float (IEEE 754)',

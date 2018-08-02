@@ -6,9 +6,9 @@ const META_TYPE = 'gpmd'
 const VIDEO_INPUT = './data/01.MP4'
 const META_OUTPUT = './gps-data/01.bin'
 
-const logger = console
+const logger = console;
 
-;(async () => {
+(async () => {
   const videoMetaIndex = await getVideoMetaIndex(VIDEO_INPUT, META_TYPE)
   logger.log(`Meta stream found at index ${videoMetaIndex}`)
   logger.log(`Starting ffmpeg command to peel metadata from video ${VIDEO_INPUT}`)
