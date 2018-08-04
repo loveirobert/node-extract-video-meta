@@ -22,7 +22,6 @@ const specials = ['', '?']
 const isSpecial = (dataType) => specials.includes(dataType)
 const accumulators = ['']
 const isAccumulator = (dataType) => accumulators.includes(dataType)
-// const isFull = (part) => part.structure.structureLength * part.structure.structureRepeat === part.size
 
 const readNext = async ({ readLength, stateOfRead, metaFile }) => {
   const readBuffer = Buffer.alloc(readLength)
@@ -69,7 +68,6 @@ const readValues = async ({
 
 async function* readSignals(metaFile, stateOfRead) {
   let signal
-  let devcCount = 0
   while (signal !== false) {
     let value = ''
     signal = await getNextSignal({ stateOfRead, metaFile })
@@ -82,9 +80,6 @@ async function* readSignals(metaFile, stateOfRead) {
       })
     }
     if (Array.isArray(value) && value.length === 1) [value] = value
-    // TODO: remove counter to read the entire file
-    if (signal === 'DEVC') devcCount += 1
-    if (devcCount === 2) signal = false
     yield {
       signal, stateOfRead: { ...stateOfRead }, dataType, structure, value,
     }
@@ -111,10 +106,6 @@ const pileUp = (parts) => {
         hierarchy.push(lastPart)
       }
     }
-    // TODO: remove the cutting
-    // if (Array.isArray(part.value)) part.value = [part.value[0]]
-    // TODO: if batch contains composite structures, like FACE it should be parsed
-    // TODO: if there is divisor the values should be divided according to it
     if (!isAccumulator(part.dataType)) batch.push(part)
   })
   return hierarchy
@@ -136,7 +127,7 @@ const parseMetaFile = async (outputFile) => {
 
   const hierarchy = pileUp(parts)
 
-  logger.log(JSON.stringify(hierarchy, null, 2))
+  return hierarchy
 }
 
 module.exports = parseMetaFile
