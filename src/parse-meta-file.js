@@ -4,8 +4,8 @@ const fs = require('fs')
 const read = promisify(fs.read)
 const open = promisify(fs.open)
 
-const signalMap = require('../config/signal-map')
-const structureTypeMap = require('../config/structure-type-map')
+const signalMap = require('./lib/gopro/signal-map')
+const structureTypeMap = require('./lib/gopro/structure-type-map')
 
 const SIGNAL_TYPE_LENGTH = 4
 const TYPE_STRUCTURE_LENGTH = 3
