@@ -25,7 +25,3 @@ const logger = console;
 
   logger.log('This is the end ...')
 })()
-
-// https://github.com/gopro/gpmf-parser/blob/master/GPMF_parser.c
-// https://github.com/gopro/gpmf-parser/blob/master/GPMF_parser.h
-// https://github.com/gopro/gpmf-parser
