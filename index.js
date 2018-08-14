@@ -12,6 +12,7 @@ const logger = console;
 
 (async () => {
   const videoMetaIndex = await getVideoMetaIndex(VIDEO_INPUT, META_TYPE)
+  if (!videoMetaIndex) return logger.log('Put a GoPro video in the data folder!')
   logger.log(`Meta stream found at index ${videoMetaIndex}`)
   logger.log(`Starting ffmpeg command to peel metadata from video ${VIDEO_INPUT}`)
 
