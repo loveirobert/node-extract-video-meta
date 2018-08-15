@@ -5,7 +5,7 @@ const read = promisify(fs.read)
 const open = promisify(fs.open)
 
 const signalMap = require('./lib/gopro/signal-map')
-const structureTypeMap = require('./lib/gopro/structure-type-map')
+const { structureTypeMap, isSpecial, isAccumulator } = require('./lib/gopro/structure-type-map')
 
 const SIGNAL_TYPE_LENGTH = 4
 const TYPE_STRUCTURE_LENGTH = 3
@@ -16,12 +16,6 @@ const logger = console
 const clean = (v) => v.replace(/\u0000/g, '')
 
 let stats
-
-// TODO: move this to somewhere else
-const specials = ['', '?']
-const isSpecial = (dataType) => specials.includes(dataType)
-const accumulators = ['']
-const isAccumulator = (dataType) => accumulators.includes(dataType)
 
 const readNext = async ({ readLength, stateOfRead, metaFile }) => {
   const readBuffer = Buffer.alloc(readLength)

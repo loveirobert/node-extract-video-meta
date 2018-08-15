@@ -1,6 +1,15 @@
 const getDataParts = require('./read-structure')
 
 const structureTypeMap = {
+  '?': {
+    description: 'Structure will be detailed later',
+    special: true,
+  },
+  '': {
+    description: 'null',
+    special: true,
+    accumulator: true,
+  },
   '\u0000': {
     description: 'null',
   },
@@ -81,4 +90,23 @@ const structureTypeMap = {
   },
 }
 
-module.exports = structureTypeMap
+const structures = Object.values(structureTypeMap)
+
+const specials = Object.keys(structureTypeMap).map((structureType, index) => {
+  if (structures[index].special) return structureType
+  return null
+}).filter((v) => (v || v === ''))
+
+const accumulators = Object.keys(structureTypeMap).map((structureType, index) => {
+  if (structures[index].accumulator) return structureType
+  return null
+}).filter((v) => (v || v === ''))
+
+const isSpecial = (key) => specials.includes(key)
+const isAccumulator = (key) => accumulators.includes(key)
+
+module.exports = {
+  structureTypeMap,
+  isSpecial,
+  isAccumulator,
+}
