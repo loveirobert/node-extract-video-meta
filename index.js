@@ -3,10 +3,15 @@ const getVideoMetaIndex = require('./src/get-video-meta-index')
 const peelMetaStream = require('./src/peel-meta-stream')
 const parseMetaFile = require('./src/parse-meta-file')
 
+const args = {}
+process.argv.slice(2).forEach((arg, i) => {
+  if (i % 2 === 0) args[arg.replace(/^-/, '')] = process.argv[i + 3]
+})
+
 const META_TYPE = 'gpmd'
-const VIDEO_INPUT = './data/01.MP4'
-const META_OUTPUT = './gps-data/01.bin'
-const META_OUTPUT_JSON = './gps-data/meta.json'
+const VIDEO_INPUT = `./data/${args.input}`
+const META_OUTPUT = './data/01.bin'
+const META_OUTPUT_JSON = './data/meta.json'
 
 const logger = console;
 
