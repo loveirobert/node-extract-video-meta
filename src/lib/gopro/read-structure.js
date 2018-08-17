@@ -1,18 +1,25 @@
 const readNext = (buffer, readState, structureLength, length, reader) => {
   let data = []
+
   for (let i = readState.position; i < readState.position + structureLength; i += length) {
     const buf = Buffer.from(buffer.slice(i, i + length))
-    if (structureLength === 1) {
-      data = buf
-    } else if (reader && structureLength === length) {
-      data = buf[reader](0, length)
-    } else if (reader) {
+    if (reader) {
+      if (reader && structureLength === length) {
+        readState.position += structureLength
+         return buf[reader](0, length)
+      }
       data.push(buf[reader](0, length))
-    } else {
-      data.push(buf)
     }
+    // TODO: totally split returned values with and without code
+    if (structureLength === 1) {
+      readState.position += structureLength
+      return buf
+    }
+    data.push(buf)
   }
+
   readState.position += structureLength
+
   return data
 }
 
